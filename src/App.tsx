@@ -1,4 +1,4 @@
-import { Box, Grid, GridItem, HStack, Heading, Show } from "@chakra-ui/react";
+import { Box, Grid, GridItem, HStack, Show } from "@chakra-ui/react";
 import "./App.css";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
@@ -36,10 +36,12 @@ function App() {
         <NavBar onSearch={(searchText)=> { setGameQuery({...gameQuery, searchText}) } } />
       </GridItem>
       
-      <GridItem area="aside" paddingX={5}>
-        <GenreList onSelect={(genre)=> { setGameQuery({...gameQuery, genre}) }} selectedGenre={gameQuery.genre}/>
-      </GridItem>
-      
+      <Show above="lg">
+        <GridItem area="aside" paddingX={5}>
+          <GenreList onSelect={(genre)=> { setGameQuery({...gameQuery, genre}) }} selectedGenre={gameQuery.genre}/>
+        </GridItem>
+      </Show>
+
       <GridItem area="main">
           <Box padding={5}>
             <GameHeading gameQuery={gameQuery} />
