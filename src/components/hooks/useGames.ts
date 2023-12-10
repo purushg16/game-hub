@@ -3,6 +3,7 @@ import { GameQuery } from "../../App";
 import { Game } from "../../services/game-services";
 import gameServices from "../../services/game-services";
 import { FetchResponse } from "../../services/api-client";
+import ms from "ms";
 
 const useGames = (gameQuery: GameQuery | null) => {
   return useInfiniteQuery<FetchResponse<Game>, Error>({
@@ -18,7 +19,8 @@ const useGames = (gameQuery: GameQuery | null) => {
         },
       }),
     getNextPageParam : (lastPage, allPages) => 
-      lastPage.next ? allPages.length + 1 : undefined
+      lastPage.next ? allPages.length + 1 : undefined,
+    staleTime: ms('24h'), //24h
   });
 };
 

@@ -3,6 +3,7 @@ import React from "react";
 import { GameQuery } from "../App";
 import useGenres from "./hooks/useGenres";
 import usePlatforms from "./hooks/usePlatform";
+import useSelector from "./hooks/useSelector";
 
 interface Props {
   gameQuery: GameQuery;
@@ -12,14 +13,9 @@ interface Props {
 export const GameHeading = ({ gameQuery }: Props) => {
   const { data: genreData } = useGenres();
   const { data: PlatformData } = usePlatforms();
-  
-  const selectedGenre = genreData?.results.find(
-    (genre) => genre.id === gameQuery.genreID
-  );
 
-  const selectedPlatform = PlatformData?.results.find(
-    (platform) => platform.id === gameQuery.platformID
-  );
+  const selectedGenre = useSelector(genreData, gameQuery.genreID)
+  const selectedPlatform = useSelector(PlatformData, gameQuery.platformID)
 
   const heading = `${selectedPlatform?.name || ""} ${
     selectedGenre?.name || ""
