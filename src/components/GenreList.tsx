@@ -1,9 +1,9 @@
 import { Box, Button, HStack, Heading, SkeletonText } from "@chakra-ui/react";
-import { Genre } from "./hooks/useGenres";
 import { Image, Link } from "@chakra-ui/react";
 import { List, ListItem } from "@chakra-ui/react";
-import useData from "./hooks/useData";
 import GenreSkeleton from "./GenreSkeleton";
+import useGenres from "./hooks/useGenres";
+import { Genre } from "../services/genre-services";
 
 interface Props {
   onSelect: (genre: Genre) => void;
@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default function GenreList({ onSelect, selectedGenre }: Props) {
-  const { data, isLoading } = useData<Genre>("/genres");
+  const { data, isLoading } =  useGenres();
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
@@ -20,10 +20,12 @@ export default function GenreList({ onSelect, selectedGenre }: Props) {
         Genres
       </Heading>
 
-      {isLoading &&
-        skeletons.map((skeleton) => <GenreSkeleton key={skeleton} />)}
+      {
+        isLoading &&
+        skeletons.map((skeleton) => <GenreSkeleton key={skeleton} />)
+      }
       <List>
-        {data.map((genre) => (
+        {data?.results.map((genre) => (
           <ListItem paddingY={2} key={genre.id}>
             <HStack>
               <Image
