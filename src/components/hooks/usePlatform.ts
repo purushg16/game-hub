@@ -3,7 +3,6 @@ import { CACHE_PLATFORMS_KEY } from "../constants";
 import platformServices, { Platform } from "../../services/platform-services";
 import { FetchResponse } from "../../services/api-client";
 
-
 const usePlatforms = () => {
     return useQuery<FetchResponse<Platform>, Error>({
       queryKey: CACHE_PLATFORMS_KEY,

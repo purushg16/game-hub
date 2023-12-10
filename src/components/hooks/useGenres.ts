@@ -5,8 +5,6 @@ import { CACHE_GENRES_KEY } from "../constants";
 import genre from "../Data/genre";
 import { FetchResponse } from "../../services/api-client";
 
-// const useGenres = () => ({ game: genres, err: '', isLoading:false });
-
 const useGenres = () => {
   return useQuery<FetchResponse<Genre>, Error>({
     queryKey: CACHE_GENRES_KEY,
