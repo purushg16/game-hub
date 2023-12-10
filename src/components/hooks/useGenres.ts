@@ -10,7 +10,7 @@ const useGenres = () => {
     queryKey: CACHE_GENRES_KEY,
     queryFn: genreServices.getAll,
     staleTime: 24 * 60 * 60 * 1000, // 24hrs
-    initialData: { count: genre.count, results: genre.results }
+    // initialData: { count: genre.count, results: genre.results }
   });
 };
 

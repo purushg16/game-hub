@@ -10,9 +10,9 @@ const useGames = (gameQuery: GameQuery | null) => {
     queryFn: ({pageParam = 1}) =>
       gameServices.getAll({
         params: {
-          genres: gameQuery?.genre?.id,
+          genres: gameQuery?.genreID,
           page: pageParam,
-          parent_platforms: gameQuery?.platform?.id,
+          parent_platforms: gameQuery?.platformID,
           ordering: gameQuery?.sortOrder,
           search: gameQuery?.searchText,
         },
