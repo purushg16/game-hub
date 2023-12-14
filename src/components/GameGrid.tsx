@@ -3,15 +3,13 @@ import useGames from "./hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
-import { GameQuery } from "../App";
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import useGameStore from "./store/gameStore";
 
-interface Props {
-  gameQuery: GameQuery | null;
-}
+export default function GameGrid() {
+  const { gameQuery } = useGameStore();
 
-export default function GameGrid({ gameQuery }: Props) {
   const {
     data,
     error,
@@ -19,22 +17,20 @@ export default function GameGrid({ gameQuery }: Props) {
     fetchNextPage,
     isFetchingNextPage,
     hasNextPage,
-  } = useGames(gameQuery);
+  } = useGames();
 
   const skeletons = [1, 2, 3, 4, 5, 6];
 
-  const fetchedGameLength = data?.pages.reduce(
-    (total, page) => total + page.results.length,
-    0
-  ) || 0;
+  const fetchedGameLength =
+    data?.pages.reduce((total, page) => total + page.results.length, 0) || 0;
 
   if (error) return <Text children={error.message} />;
 
   return (
-    <InfiniteScroll 
+    <InfiniteScroll
       dataLength={fetchedGameLength}
       hasMore={!!hasNextPage}
-      next={()=>fetchNextPage()}
+      next={() => fetchNextPage()}
       loader={<Spinner />}
     >
       <SimpleGrid

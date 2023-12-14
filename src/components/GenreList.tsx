@@ -1,18 +1,22 @@
-import { Box, Button, HStack, Heading, SkeletonText } from "@chakra-ui/react";
-import { Image } from "@chakra-ui/react";
-import { List, ListItem } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  HStack,
+  Heading,
+  Image,
+  List,
+  ListItem,
+} from "@chakra-ui/react";
 import GenreSkeleton from "./GenreSkeleton";
 import useGenres from "./hooks/useGenres";
-import { Genre } from "../services/genre-services";
+import useGameStore from "./store/gameStore";
 
-interface Props {
-  onSelect: (genre: Genre) => void;
-  selectedGenreID?: number;
-}
-
-export default function GenreList({ onSelect, selectedGenreID }: Props) {
+export default function GenreList() {
   const { data, isLoading } = useGenres();
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+  const setGenreId = useGameStore((s) => s.setGenreId);
+  const selectedGenreId = useGameStore((s) => s.gameQuery.genreId);
 
   return (
     <Box padding={3}>
@@ -36,8 +40,8 @@ export default function GenreList({ onSelect, selectedGenreID }: Props) {
                 whiteSpace="normal"
                 textAlign="left"
                 variant="link"
-                onClick={() => onSelect(genre)}
-                fontWeight={selectedGenreID === genre.id ? "bold" : "normal"}
+                onClick={() => setGenreId(genre.id)}
+                fontWeight={selectedGenreId === genre.id ? "bold" : "normal"}
               >
                 {genre.name}
               </Button>

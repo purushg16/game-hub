@@ -1,35 +1,42 @@
+import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import { BsChevronDown } from "react-icons/bs";
+import useGameStore from "./store/gameStore";
 
-import { Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
-import { BsChevronDown } from 'react-icons/bs';
+export const SortSelector = () => {
+  const sortItem = [
+    { value: "", label: "Relevance" },
+    { value: "-added", label: "Date Added" },
+    { value: "name", label: "Name" },
+    { value: "-released", label: "Release Date" },
+    { value: "-metacritic", label: "Popularity" },
+    { value: "-rating", label: "Average Rating" },
+  ];
 
-interface Props{
-    onSelectOrder: (order: string) => void,
-    orderValue: string
-}
+  const setSorder = useGameStore((s) => s.setSorder);
+  const selectedSortOrder = useGameStore((s) => s.gameQuery.sortOrder);
 
-export const SortSelector = ({onSelectOrder, orderValue}:Props) => {
+  const selectedOrder = sortItem.find(
+    (order) => order.value == selectedSortOrder
+  );
 
-    const sortItem = [
-        { value: '', label: 'Relevance' },
-        { value: '-added', label: 'Date Added' },
-        { value: 'name', label: 'Name' },
-        { value: '-released', label: 'Release Date' },
-        { value: '-metacritic', label: 'Popularity' },
-        { value: '-rating', label: 'Average Rating' },
-    ]
-
-    const selectedOrder = sortItem.find( order => order.value == orderValue )
-
-    return (
-        <Menu>
-          <MenuButton as={Button} rightIcon={<BsChevronDown />}>
-            Order By: { selectedOrder?.label || 'Relevance'}
-          </MenuButton>
-          <MenuList>
-            {sortItem.map(item=>(
-                <MenuItem key={item.value} onClick={()=>{onSelectOrder(item.value)}}> {item.label} </MenuItem>
-            ))}
-          </MenuList>
-        </Menu>
-      );
-}
+  return (
+    <Menu>
+      <MenuButton as={Button} rightIcon={<BsChevronDown />}>
+        Order By: {selectedOrder?.label || "Relevance"}
+      </MenuButton>
+      <MenuList>
+        {sortItem.map((item) => (
+          <MenuItem
+            key={item.value}
+            onClick={() => {
+              setSorder(item.value);
+            }}
+          >
+            {" "}
+            {item.label}{" "}
+          </MenuItem>
+        ))}
+      </MenuList>
+    </Menu>
+  );
+};
