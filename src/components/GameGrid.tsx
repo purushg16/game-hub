@@ -8,8 +8,6 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import useGameStore from "./store/gameStore";
 
 export default function GameGrid() {
-  const { gameQuery } = useGameStore();
-
   const {
     data,
     error,
