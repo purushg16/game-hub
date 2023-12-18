@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Genre } from "../../services/genre-services";
+import { Genre } from "../entities/Genre";
 import genreServices from "../../services/genre-services";
 import { CACHE_GENRES_KEY } from "../constants";
 import genre from "../Data/genre";
@@ -10,8 +10,8 @@ const useGenres = () => {
   return useQuery<FetchResponse<Genre>, Error>({
     queryKey: CACHE_GENRES_KEY,
     queryFn: genreServices.getAll,
-    staleTime: ms('24h'), // 24hrs
-    initialData: genre
+    staleTime: ms("24h"), // 24hrs
+    initialData: genre,
   });
 };
 

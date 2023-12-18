@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { FetchResponse } from "../../services/api-client";
-import detailsServices, { GameDeatils } from "../../services/details-services";
+import detailsServices from "../../services/details-services";
 import ms from "ms";
+import { Game } from "../entities/Game";
 
 const useGameDetails = (slug: string) => {
-  return useQuery<GameDeatils, Error>({
+  return useQuery<Game, Error>({
     queryKey: ["games", slug],
-    queryFn: () => detailsServices.getDetails("/" + slug),
+    queryFn: () => detailsServices.getDetails(slug),
     staleTime: ms("24h"),
   });
 };

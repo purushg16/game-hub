@@ -3,7 +3,7 @@ import PlatformIconList from "./PlatformIconList";
 import ScoreBadge from "./ScoreBadge";
 import placholder from "../assets/placeholder.png";
 import { Emojis } from "./Emojis";
-import { Game } from "../services/game-services";
+import { Game } from "./entities/Game";
 import { Link } from "react-router-dom";
 
 interface Props {

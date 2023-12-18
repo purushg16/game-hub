@@ -1,10 +1,4 @@
 import APIClient from "./api-client";
+import { Game } from "../components/entities/Game";
 
-export interface GameDeatils {
-  id: number;
-  name: string;
-  slug: string;
-  description_raw: string;
-}
-
-export default new APIClient<GameDeatils>("/games");
+export default new APIClient<Game>("/games");

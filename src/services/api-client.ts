@@ -30,6 +30,8 @@ export default class APIClient<T> {
   };
 
   getDetails = (slug: string) => {
-    return axiosInstance.get<T>(this.endpoint + slug).then((res) => res.data);
+    return axiosInstance
+      .get<T>(this.endpoint + "/" + slug)
+      .then((res) => res.data);
   };
 }
