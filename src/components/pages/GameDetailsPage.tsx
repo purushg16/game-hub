@@ -5,6 +5,7 @@ import ExpandableText from "../ExpandableText";
 import GameAttributes from "../GameAttributes";
 import useGameDetails from "../hooks/useGameDetails";
 import GameTrailer from "../GameTrailer";
+import ScreenShotGrid from "../ScreenShotGrid";
 
 const GameDetailsPage = () => {
   const params = useParams();
@@ -19,6 +20,7 @@ const GameDetailsPage = () => {
       <ExpandableText text={game.description_raw} />
       <GameAttributes game={game} />
       <GameTrailer slug={game.slug} />
+      <ScreenShotGrid slug={game.slug} />
     </Box>
   );
 };
