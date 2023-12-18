@@ -8,6 +8,7 @@ interface Props {
 const GameTrailer = ({ slug }: Props) => {
   const { data, isLoading, error } = useGameTrailer(slug);
   if (!data) return null;
+  if (isLoading) return null;
   if (error) throw error;
 
   const first = data.results[0];

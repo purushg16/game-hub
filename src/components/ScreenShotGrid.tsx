@@ -15,9 +15,9 @@ const ScreenShotGrid = ({ slug }: Props) => {
   if (isLoading) return null;
 
   return (
-    <SimpleGrid columns={[1, 2, 2]} spacing={2} marginY={5}>
+    <SimpleGrid columns={{ base: 1, md: 2 }} spacing={2} marginY={5}>
       {data.results.map((img) => (
-        <Image src={img.image} alt="" />
+        <Image src={img.image} alt="" loading="eager" />
       ))}
     </SimpleGrid>
   );
